@@ -1,7 +1,6 @@
 package com.lusiwei.pojo;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * 用户实体类
@@ -25,7 +24,7 @@ public class User implements Serializable {
     private String email;
     //激活状态，Y代表激活，N代表未激活
     private String status;
-    //激活码（要求唯一）
+    /* 激活码（要求唯一） */
     private String code;
 
     /**
