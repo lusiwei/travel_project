@@ -2,7 +2,7 @@ package com.lusiwei.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lusiwei.dto.ResultMessage;
+import com.lusiwei.dto.ResultMessageEnum;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,9 +24,9 @@ public class CheckCodeController extends BaseController {
         String resultMessage;
         try {
             if (checkcode_server.equalsIgnoreCase(code)) {
-                resultMessage=objectMapper.writeValueAsString(new ResultMessage(true, "验证码正确"));
+                resultMessage=ResultMessageEnum.CHECKCODE_TRUE.toString();
             } else {
-                resultMessage=objectMapper.writeValueAsString(new ResultMessage(false, "验证码错误"));
+                resultMessage=ResultMessageEnum.CHECKCODE_FALSE.toString();
             }
             response.getWriter().write(resultMessage);
         } catch (JsonProcessingException e) {

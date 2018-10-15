@@ -324,3 +324,13 @@ h1, h2, h3, h4, h5, h6 {
 .pageNum ul .threeword {
   width: 75px;
 }
+
+#routeList p{
+    font-size: 14px;
+}
+#routeList .img img{
+    width: 95%;
+}
+.pageNum ul li a{
+    display: block;
+}

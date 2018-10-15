@@ -2,7 +2,7 @@ package com.lusiwei.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lusiwei.dto.ResultMessage;
+import com.lusiwei.dto.ResultMessageEnum;
 import com.lusiwei.pojo.User;
 import com.lusiwei.service.impl.RegisterServiceImpl;
 import org.apache.commons.beanutils.BeanUtils;
@@ -30,9 +30,9 @@ public class RegisterController extends BaseController {
         ObjectMapper objectMapper = new ObjectMapper();
         String returnMessage;
         if (flag) {
-            returnMessage = objectMapper.writeValueAsString(new ResultMessage(true, "用户名可用"));
+            returnMessage = ResultMessageEnum.USERNAME_AVAILABLE.toString();
         } else {
-            returnMessage = objectMapper.writeValueAsString(new ResultMessage(false, "用户名不可用"));
+            returnMessage = ResultMessageEnum.USERNAME_UNAVAILABLE.toString();
         }
         try {
             response.getWriter().write(returnMessage);
@@ -50,9 +50,9 @@ public class RegisterController extends BaseController {
         String returnMessage;
         try {
             if (flag) {
-                returnMessage = objectMapper.writeValueAsString(new ResultMessage(true, "邮箱可用,"));
+                returnMessage = ResultMessageEnum.EMAIL_AVAILABLE.toString();
             } else {
-                returnMessage = objectMapper.writeValueAsString(new ResultMessage(false, "邮箱不可用,该邮箱已经被注册!!!"));
+                returnMessage = ResultMessageEnum.EMAIL_UNAVAILABLE.toString();
             }
             response.getWriter().write(returnMessage);
         } catch (JsonProcessingException e) {

@@ -18,20 +18,15 @@ import java.sql.SQLException;
  */
 public class RegisterServiceImpl implements RegisterService {
     private UserDaoImpl userDao = new UserDaoImpl();
-
+    Connection connection = null;
     public boolean checkUserName(String username) {
-        Connection connection = null;
         try {
             connection = JDBCUtils.getConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         User user = userDao.queryUserName(connection, username);
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        JDBCUtils.close(connection,null);
         if (user == null) {
             return true;
         }
@@ -39,17 +34,16 @@ public class RegisterServiceImpl implements RegisterService {
     }
 
     public boolean checkEmail(String email) {
-        Connection connection = null;
         try {
             connection = JDBCUtils.getConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        JDBCUtils.close(connection,null);
         return userDao.queryUserEmail(connection, email);
     }
 
     public void register(User user, HttpServletRequest request) {
-        Connection connection = null;
         try {
             connection = JDBCUtils.getConnection();
         } catch (SQLException e) {
@@ -66,20 +60,29 @@ public class RegisterServiceImpl implements RegisterService {
         if (i > 0) {
             MailUtils.sendMail("13232677506@163.com", emailText, "账户激活邮件");
         }
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        JDBCUtils.close(connection,null);
     }
 
     public void updateStatus(String code) {
-        Connection connection=null;
         try {
             connection = JDBCUtils.getConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         userDao.updateStatus(connection,code);
+        JDBCUtils.close(connection,null);
+    }
+
+    @Override
+    public User login(String username, String password) {
+        try {
+            connection=JDBCUtils.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        User user = userDao.login(connection, username, password);
+
+        JDBCUtils.close(connection,null);
+        return user;
     }
 }

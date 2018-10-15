@@ -1,6 +1,7 @@
 package com.lusiwei.controller;
 
-import javax.servlet.ServletException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,30 +11,31 @@ import java.lang.reflect.Method;
 
 /**
  * Created  by lusiwei on 2018/10/11
+ *
  * @author lusiwei
  */
 public class BaseController extends HttpServlet {
+    static ObjectMapper objectMapper = new ObjectMapper();
+    private String methodName;
+    private static final String REDIRECT = "redirect";
+
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String methodName = req.getParameter("method");
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        methodName = req.getParameter("method");
         Class<? extends BaseController> aClass = this.getClass();
-        methodName=methodName==null?"defaultMethod":methodName;
+        methodName = methodName == null ? "defaultMethod" : methodName;
+        String methodReturn;
         try {
             Method method1 = aClass.getMethod(methodName, HttpServletRequest.class, HttpServletResponse.class);
-            String string= (String) method1.invoke(this, req, resp);
-//            System.out.println("-----"+string);
-            if (string != null) {
-                if (string.contains("redirect")) {
-                    resp.sendRedirect(string.substring(string.indexOf(":")+1));
-                }else {
-                    req.getRequestDispatcher(string);
+            methodReturn = (String) method1.invoke(this, req, resp);
+            if (methodReturn != null) {
+                if (methodReturn.contains(REDIRECT)) {
+                    resp.sendRedirect(methodReturn.substring(methodReturn.indexOf(":") + 1));
+                } else {
+                    req.getRequestDispatcher(methodReturn);
                 }
             }
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
 

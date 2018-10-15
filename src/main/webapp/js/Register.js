@@ -36,7 +36,8 @@ function checkUserName() {
             dataType: "json",
             success: function (data) {
                 // alert(data.flag);
-                if (data.flag) {
+                alert(data);
+                if (data.code=="009") {
                     // alert(data.message);
                     $(".message").html("");
                     $("#username").css({"border": "1px solid green"});
@@ -80,7 +81,7 @@ function checkEmail() {
             dataType: "json",
             success: function (data) {
                 // alert(data);
-                if (data.flag) {
+                if (data.code=="007") {
                     // alert(data.message);
                     $(".message").html("");
                     $("#email").css({"border": "1px solid green"});
@@ -108,7 +109,7 @@ function checkCode() {
             data: {"code": $("#check").val(), "method": "checkCode"},
             success: function (data) {
                 // alert(data.flag);
-                if (data.flag) {
+                if (data.code=="011") {
                     $(".message").html("");
                     $("#check").css({"border": "1px solid green"});
                     res = true;

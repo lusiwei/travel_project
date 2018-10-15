@@ -41,4 +41,10 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao {
         String sql="update tab_user set status=? where code=?";
         super.update(connection, sql, "Y",code);
     }
+
+    public User login(Connection connection, String username, String password) {
+        String sql="select * from tab_user where username=? and password=?";
+        User user = super.querySingle(connection, User.class,sql, username, password);
+        return user;
+    }
 }

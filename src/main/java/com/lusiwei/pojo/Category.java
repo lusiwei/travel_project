@@ -4,16 +4,17 @@ import java.io.Serializable;
 
 /**
  * 分类实体类
+ * @author lusiwei
  */
 public class Category implements Serializable {
 
-    private int cid;//分类id
+    private Integer cid;//分类id
     private String cname;//分类名称
 
     public Category() {
     }
 
-    public Category(int cid, String cname) {
+    public Category(Integer cid, String cname) {
         this.cid = cid;
         this.cname = cname;
     }
@@ -26,11 +27,11 @@ public class Category implements Serializable {
                 '}';
     }
 
-    public int getCid() {
+    public Integer getCid() {
         return cid;
     }
 
-    public void setCid(int cid) {
+    public void setCid(Integer cid) {
         this.cid = cid;
     }
 

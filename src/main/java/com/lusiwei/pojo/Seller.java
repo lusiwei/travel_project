@@ -6,7 +6,7 @@ import java.io.Serializable;
  * 商家实体类
  */
 public class Seller implements Serializable {
-    private int sid;//商家id
+    private Integer sid;//商家id
     private String sname;//商家名称
     private String consphone;//商家电话
     private String address;//商家地址
@@ -23,18 +23,18 @@ public class Seller implements Serializable {
      * @param consphone
      * @param address
      */
-    public Seller(int sid, String sname, String consphone, String address) {
+    public Seller(Integer sid, String sname, String consphone, String address) {
         this.sid = sid;
         this.sname = sname;
         this.consphone = consphone;
         this.address = address;
     }
 
-    public int getSid() {
+    public Integer getSid() {
         return sid;
     }
 
-    public void setSid(int sid) {
+    public void setSid(Integer sid) {
         this.sid = sid;
     }
 
