@@ -10,7 +10,7 @@ $.get("routeDetailController", {"method": "queryRouteDetailByRid", "rid": rid}, 
     $(".rname").html("[尾单特卖] " + data.rname);
     $(".routeIntroduce").html(data.routeIntroduce)
     $("#price").html("￥" + data.price + " ")
-
+    //设置商家信息
     $("#sname").html("公司名称: " + data.seller.sname);
     $("#consphone").html("联系电话: " + data.seller.consphone);
     $("#address").html("地址: " + data.seller.address);
@@ -18,6 +18,7 @@ $.get("routeDetailController", {"method": "queryRouteDetailByRid", "rid": rid}, 
     let count = 0;
     $("#favorite").on("click", function () {
         $.get("favoriteController", {"rid": rid, "method": "addFavorite"}, function (data) {
+            console.log(data);
             if (data.code == "favorite_success") {
                 console.log("收藏成功");
                 $("#favorite").attr("disabled", true).addClass("already").html("已收藏");
@@ -26,13 +27,16 @@ $.get("routeDetailController", {"method": "queryRouteDetailByRid", "rid": rid}, 
                 $("#favorited").html("已收藏" + ++count + "次");
 
             } else {
-                alert("收藏失败")
+                alert("请先登录")
+                location.href="login.html";
             }
         }, "json");
     })
     if (data.favorite) {
         $("#favorite").attr("disabled", true).addClass("already").html("已收藏");
         $("#favorite").off();
+    }else {
+
     }
     $("#favorited").html("已收藏" + data.count + "次");
 

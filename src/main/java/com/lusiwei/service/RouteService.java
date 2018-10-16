@@ -12,5 +12,7 @@ public interface RouteService {
      * @return String
      * 通过controller层传过来的cid去调用dao层的方法查询
      */
-    String queryRouteByCid(Integer cid,int curPage);
+    String queryRouteByCid(Integer cid,int curPage,String recentRoute);
+
+    String queryRouteByRid(int parseInt);
 }

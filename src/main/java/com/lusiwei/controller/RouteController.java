@@ -19,6 +19,7 @@ public class RouteController extends BaseController {
     private RouteService routeService = new RouteServiceImpl();
 
     public void queryRouteByCid(HttpServletRequest request, HttpServletResponse response) {
+        String recentRoute = (String) request.getSession().getAttribute("recentRoute");
         //获取cid
         String cid = request.getParameter("cid");
         //获取当前页
@@ -28,13 +29,24 @@ public class RouteController extends BaseController {
         //cid为空时赋值为1
         cid = (cid == null) ? "1" : cid;
         //从业务层拿到routeList的json字符串
-        String routeList = routeService.queryRouteByCid(Integer.parseInt(cid), Integer.parseInt(curPage));
+        String routeList = routeService.queryRouteByCid(Integer.parseInt(cid), Integer.parseInt(curPage),recentRoute);
+        System.out.println(recentRoute);
+        System.out.println(routeList);
         //返回到前台
         try {
             response.getWriter().write(routeList);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public void queryAllRouteByRid(HttpServletRequest request, HttpServletResponse response) {
+        String rid = request.getParameter("rid");
+        String routeString=routeService.queryRouteByRid(Integer.parseInt(rid));
+        try {
+            response.getWriter().write(routeString);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -22,6 +22,11 @@
             <version>3.1.0</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.47</version>
+        </dependency>
 
 
         <!--mysql驱动-->
@@ -149,6 +154,7 @@
                     <port>80</port>
                     <!-- 项目访问路径  本例：localhost:9090,  如果配置的aa， 则访问路径为localhost:9090/aa-->
                     <path>/travel</path>
+                    <uriEncoding>utf-8</uriEncoding>
                 </configuration>
             </plugin>
 

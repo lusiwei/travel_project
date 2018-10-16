@@ -29,4 +29,6 @@ public interface RouteDao {
      *
      */
     long queryCount(Connection connection, Integer cid);
+
+    List<Route> queryRouteByRid(Connection connection, int rid);
 }

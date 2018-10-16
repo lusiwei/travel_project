@@ -32,7 +32,7 @@ public class RouteServiceImpl implements RouteService {
      * @return
      */
     @Override
-    public String queryRouteByCid(Integer cid,int curPage) {
+    public String queryRouteByCid(Integer cid,int curPage,String recentRoute) {
         //获取数据库连接
         try {
             connection= JDBCUtils.getConnection();
@@ -55,7 +55,8 @@ public class RouteServiceImpl implements RouteService {
         routePageUtil.setDataList(routeList);
         //设置当前页
         routePageUtil.setCurPage(curPage);
-
+        //设置最近访问
+        routePageUtil.setRecentRoute(recentRoute);
         try {
             routeListString=objectMapper.writeValueAsString(routePageUtil);
         } catch (JsonProcessingException e) {
@@ -63,6 +64,24 @@ public class RouteServiceImpl implements RouteService {
         }
         JDBCUtils.close(connection,null);
         return routeListString;
+    }
+
+    @Override
+    public String queryRouteByRid(int rid) {
+        try {
+            connection=JDBCUtils.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        String rString=null;
+        List<Route> routeList=routeDao.queryRouteByRid(connection,rid);
+        try {
+            rString  = objectMapper.writeValueAsString(routeList);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        JDBCUtils.close(connection,null);
+        return rString;
     }
 
 

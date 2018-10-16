@@ -15,7 +15,7 @@ import java.lang.reflect.Method;
  * @author lusiwei
  */
 public class BaseController extends HttpServlet {
-    static ObjectMapper objectMapper = new ObjectMapper();
+    public static ObjectMapper objectMapper = new ObjectMapper();
     private String methodName;
     private static final String REDIRECT = "redirect";
 

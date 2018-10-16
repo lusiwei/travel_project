@@ -24,7 +24,7 @@
         <dl class="prosum_left">
             <dt>
                 <img alt="" class="big_img"
-                     src="http://www.jinmalvyou.com/Public/uploads/goods_img/img_size4/201703/m49788843d72171643297ccc033d9288ee.jpg">
+                     src="img/product/size2/m2f848821d328f05aa08c4bc322889dbac.jpg">
             </dt>
         </dl>
         <div class="prosum_right">
@@ -90,7 +90,7 @@
     $(document).ready(function () {
         //焦点图效果
         //点击图片切换图片
-        $('.little_img').on('mousemove', function () {
+        $(document).on('mousemove','.little_img', function () {
             $('.little_img').removeClass('cur_img');
             var big_pic = $(this).data('bigpic');
             $('.big_img').attr('src', big_pic);
@@ -99,7 +99,7 @@
         //上下切换
         var picindex = 0;
         var nextindex = 4;
-        $('.down_img').on('click', function () {
+        $(document).on('click','.down_img', function () {
             var num = $('.little_img').length;
             if ((nextindex + 1) <= num) {
                 $('.little_img:eq(' + picindex + ')').hide();
@@ -108,7 +108,7 @@
                 nextindex = nextindex + 1;
             }
         });
-        $('.up_img').on('click', function () {
+        $(document).on('click','.up_img', function () {
             var num = $('.little_img').length;
             if (picindex > 0) {
                 $('.little_img:eq(' + (nextindex - 1) + ')').hide();

@@ -33,6 +33,8 @@ public class FavoriteController extends BaseController {
             }catch(Exception e){
                 b=false;
             }
+        }else {
+            b=false;
         }
         if (b) {
             resultMessage = ResultMessageEnum.FAVORITE_SUCCESS.toString();

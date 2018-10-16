@@ -15,7 +15,7 @@ public class PageUtil<E> {
     private Long totalCount;
     /**每页条数*/
     private Integer pageSize=10;
-
+    private String recentRoute;
     private List<E> dataList;
 
     public Integer getCurPage() {
@@ -56,5 +56,13 @@ public class PageUtil<E> {
 
     public void setDataList(List<E> dataList) {
         this.dataList = dataList;
+    }
+
+    public String getRecentRoute() {
+        return recentRoute;
+    }
+
+    public void setRecentRoute(String recentRoute) {
+        this.recentRoute = recentRoute;
     }
 }

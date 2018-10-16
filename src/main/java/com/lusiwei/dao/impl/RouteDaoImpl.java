@@ -26,4 +26,11 @@ public class RouteDaoImpl extends BaseDao<Route> implements RouteDao {
         long l = super.queryCount(connection, sql, cid);
         return l;
     }
+
+    @Override
+    public List<Route> queryRouteByRid(Connection connection, int rid) {
+        String sql="select * from tab_route where rid=?";
+        List<Route> routeList = super.queryList(connection, Route.class, sql, rid);
+        return routeList;
+    }
 }
